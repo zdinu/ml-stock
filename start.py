@@ -88,7 +88,7 @@ predictions = scaler.inverse_transform(predictions)#Undo scaling
 
 #Calculate/Get the value of RMSE
 rmse=np.sqrt(np.mean(((predictions- y_test)**2)))
-print('RMSE:', rmse)
+print('RMSE: this is the error level', rmse)
 
 #Plot/Create the data for the graph
 train = data[:training_data_len]
@@ -105,34 +105,41 @@ plt.plot(valid[['Close', 'Predictions']])
 plt.legend(['Train', 'Val', 'Predictions'], loc='lower right')
 plt.show()
 
-print('Valid:', valid)
+#print('Valid:', valid)
 
 ##########################
 
 
-#Get the quote
-apple_quote = web.DataReader('AAPL', data_source='yahoo', start='2012-01-01', end='2020-12-28')
-#Create a new dataframe
-new_df = apple_quote.filter(['Close'])
-#Get teh last 60 day closing price
-last_60_days = new_df[-60:].values
-#Scale the data to be values between 0 and 1
-last_60_days_scaled = scaler.transform(last_60_days)
-#Create an empty list
-X_test = []
-#Append teh past 60 days
-X_test.append(last_60_days_scaled)
-#Convert the X_test data set to a numpy array
-X_test = np.array(X_test)
-#Reshape the data
-X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
-#Get the predicted scaled price
-pred_price = model.predict(X_test)
-#undo the scaling
-pred_price = scaler.inverse_transform(pred_price)
-print('Actual:',last_60_days)
-print('Predicted:', pred_price)
+##########
+
+#Some tests - ignore this part
 
 #Get the quote
-apple_quote2 = web.DataReader('AAPL', data_source='yahoo', start='2020-12-29', end='2020-12-29')
-print(apple_quote2['Close'])
+  #apple_quote = web.DataReader('AAPL', data_source='yahoo', start='2012-01-01', end='2020-12-28')
+
+#Create a new dataframe
+  #new_df = apple_quote.filter(['Close'])
+#Get teh last 60 day closing price
+  #last_60_days = new_df[-60:].values
+
+#Scale the data to be values between 0 and 1
+  #last_60_days_scaled = scaler.transform(last_60_days)
+
+#Create an empty list
+  #X_test = []
+#Append teh past 60 days
+   #X_test.append(last_60_days_scaled)
+#Convert the X_test data set to a numpy array
+   #X_test = np.array(X_test)
+#Reshape the data
+   #X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
+#Get the predicted scaled price
+   #pred_price = model.predict(X_test)
+#undo the scaling
+   #pred_price = scaler.inverse_transform(pred_price)
+   #print('Actual:',last_60_days)
+   #print('Predicted:', pred_price)
+
+#Get the quote
+   #apple_quote2 = web.DataReader('AAPL', data_source='yahoo', start='2020-12-29', end='2020-12-29')
+   #print(apple_quote2['Close'])
